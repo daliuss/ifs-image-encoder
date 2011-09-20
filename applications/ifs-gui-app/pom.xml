@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>ifs</groupId>
+    <artifactId>ifs-pom</artifactId>
+    <version>1.1-SNAPSHOT</version>
+    <relativePath>../../</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ifs.applications</groupId>
+  <artifactId>ifs-gui-app</artifactId>
+  <version>${parent.version}</version>
+  <name>IFS GUI application</name>
+  <url>http://maven.apache.org</url>
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+    <directory>${basedir}/target/lib</directory>
+    <finalName>${artifactId}</finalName>
+    <!--copy file="src/main/resources/bin/start.bat" tofile="${basedir}/target/bin/start.bat"/-->
+         <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>ifs.applications.Main</mainClass>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                            <executions>
+                                <execution>
+                                    <phase>install</phase>
+                                    <goals>
+                                        <goal>copy-dependencies</goal>
+                                    </goals>
+                                    <configuration>
+                                        <outputDirectory>${project.build.directory}</outputDirectory>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                    </plugin>
+
+        </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  <dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>${log4j.version}</version>
+    <scope>compile</scope>
+  </dependency>
+  <dependency>
+    <groupId>ifs.encoder</groupId>
+    <artifactId>ifs-encoder</artifactId>
+    <version>${parent.version}</version>
+    <scope>compile</scope>
+  </dependency>
+  </dependencies>
+</project>

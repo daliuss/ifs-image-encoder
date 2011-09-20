@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ifs</groupId>
+  <artifactId>ifs-pom</artifactId>
+  <version>1.1-SNAPSHOT</version>
+  <name>IFS Project Pom</name>
+  <url>http://maven.apache.org</url>
+  
+  <packaging>pom</packaging>
+
+  <properties>
+    <junit.version>4.8.1</junit.version>
+    <log4j.version>1.2.12</log4j.version>
+  </properties>
+
+  <modules>                     
+    <module>ifs-encoder</module>
+    <module>applications/ifs-gui-app</module>
+  </modules>
+
+</project>
