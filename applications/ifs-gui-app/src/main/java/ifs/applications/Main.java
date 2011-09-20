@@ -1,50 +1,34 @@
 package ifs.applications;
 
-import java.io.File;
-import java.util.Arrays;
-
 import org.apache.log4j.Logger;
-
-import ifs.encoder.components.impl.BlockSlicerStrategyDynamic;
-import ifs.encoder.components.impl.SliceComparatorSoftwareLinear;
-import ifs.encoder.services.IFSImageService;
-import ifs.encoder.services.RasterImageService;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.beans.factory.BeanFactory;
 
 public class Main {
 	
 	public static final Logger log = Logger.getLogger(Main.class);
 	
-	static String filesPath = "files/";
-	static boolean debug = false;
+	public static final String BEAN_DEFINITION_XML = "classpath:META-INF/spring/*-beans.xml";
+	public static final String MENU_BEAN = "menu";
 	
-	static public void main(String[] args) {
+	private static BeanFactory beanFactoryInstance;
 		
-		if (args.length > 0) {
-			log.info("Params bound:");
-			log.info(Arrays.toString(args));
-			if (args[0]!=null) {
-				filesPath = args[0];
-				log.info("Document path: " + (new File(filesPath)).getAbsolutePath());
-			}
-			if (args.length > 1 && args[1]!=null) {
-				if ("true".equals(args[1].toLowerCase())) {
-					debug = true;
-				}
-				if ("false".equals(args[1].toLowerCase())) {
-					debug = false;
-				}
-			}
-		}
+	static public void main(String[] args) {
 		initializeObjects();
 	}
 	
 	static void initializeObjects() {
-		MainApplicationController menu = new MainApplicationController();
-		menu.setInitImage(new File(filesPath + "init.png"));
-		menu.setRasterImageService(new RasterImageService());
-		menu.setIfsImageService(new IFSImageService());
-		menu.getIfsImageService().setBlockSlicerStrategy(new BlockSlicerStrategyDynamic());
-		menu.getIfsImageService().setSliceComparator(new SliceComparatorSoftwareLinear());
+		MainApplicationController menu = (MainApplicationController)getBeanFactory().getBean(MENU_BEAN);
 		menu.display();
+	}
+	
+	static BeanFactory getBeanFactory() {
+		if (beanFactoryInstance == null) {
+			GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+			ctx.load(BEAN_DEFINITION_XML);
+			ctx.refresh();
+			beanFactoryInstance = (BeanFactory)ctx;
+		}
+		return beanFactoryInstance;
 	}
 }
