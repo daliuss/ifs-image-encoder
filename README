@@ -1,0 +1,19 @@
+* General
+  This applications dedicated for investigation of Iterative Function System image encoding.
+  It is not for usage. Only educational purposes.
+
+  Author: Dalius Sidlauskas
+  For any questions please contact: dalius(dot)sidlauskas(at)gmail(dot)com 
+
+* Requirements 
+  1. Java 6
+  2. Maven 3.0.3
+
+* Build and launch instructions
+  1. To build from root directory:
+     $ mvn install
+  2. To launch:
+     $ cd applications/ifs-gui-app/target
+     $ java -jar lib/ifs-gui-app.jar
+ 
+
