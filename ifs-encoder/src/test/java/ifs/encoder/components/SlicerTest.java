@@ -38,6 +38,7 @@ public class SlicerTest extends TestCase {
 	
 	public void testIdentity() {
 		Assert.assertTrue(slicer.getBlockCount()==13);
+		Assert.assertEquals(slicer.getInitPartSize(),PartSize.p32);
 		
 		slicer.getCurrent().setPart(0);
 		Assert.assertTrue(slicer.getCurrent().sx==0);
