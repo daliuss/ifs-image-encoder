@@ -12,6 +12,7 @@
   <properties>
     <junit.version>4.8.1</junit.version>
     <log4j.version>1.2.12</log4j.version>
+    <powermock.version>1.4.8</powermock.version>
   </properties>
 
   <modules>                     
